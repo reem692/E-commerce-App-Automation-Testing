@@ -1,4 +1,5 @@
 @register
+@regression
 Feature: user could register with valid data
 
   Background: user opens browser to register

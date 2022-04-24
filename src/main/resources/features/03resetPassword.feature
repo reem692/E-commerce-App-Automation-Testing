@@ -1,4 +1,5 @@
 @reset
+@regression
 Feature: user could reset his/her password successfully
 
   Background: user opens browser to reset password

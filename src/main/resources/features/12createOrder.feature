@@ -1,4 +1,5 @@
 @createOrder
+@regression
 Feature: user creates successful order
 
   Background: user opens browser to create an order

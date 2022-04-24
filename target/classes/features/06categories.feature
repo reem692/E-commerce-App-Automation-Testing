@@ -1,4 +1,5 @@
 @category
+@regression
 Feature: Logged user could select different Categories
 
   Background: user opens browser to select categories

@@ -1,4 +1,5 @@
 @compareList
+@regression
 Feature: Logged user could add different products to compare list
 
   Background: user opens browser to add products to compare list

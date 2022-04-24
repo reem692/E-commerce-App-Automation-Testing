@@ -1,4 +1,5 @@
 @color
+@regression
 Feature: Logged user could filter with color
 
   Background: user opens browser to select filter color

@@ -1,4 +1,5 @@
 @login
+@regression
 Feature: user could log in with valid email and password
   Background: user opens browser to login
     And user navigates to login page

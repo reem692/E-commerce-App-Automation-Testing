@@ -1,4 +1,5 @@
 @tag
+@regression
 Feature: Logged user could select different tags
 
   Background: user opens browser to select tags

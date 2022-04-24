@@ -1,4 +1,5 @@
 @wishList
+@regression
 Feature: Logged user could add different products to Wishlist
 
   Background: user opens browser to add products to wish list

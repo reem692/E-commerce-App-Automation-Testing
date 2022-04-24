@@ -1,4 +1,5 @@
 @register
+@regression
 Feature: user could register with valid data
 
   Background: user opens browser to register
@@ -9,7 +10,7 @@ Feature: user could register with valid data
     And user fills in first name with "Jane"
     And user fills in last name with "Doe"
     And user chooses as birthdate "1" as day and "2" as month and "1990" as year
-    And user enters email "jane.doe@gmail.com"
+    And user enters email "joe.doe@gmail.com"
     And user fills in company name with " "
     And user chooses Newsletter
     And user fills in password with "password"

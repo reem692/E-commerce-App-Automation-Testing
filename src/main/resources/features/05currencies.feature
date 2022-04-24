@@ -1,4 +1,5 @@
 @currency
+@regression
 Feature: Logged User could switch between currencies US-Euro
 
   Background: user opens browser to switch between currencies

@@ -1,4 +1,5 @@
 @shoppingCart
+@regression
 Feature: Logged user could add different products to Shopping cart
 
   Background: user opens browser to add products to shopping cart

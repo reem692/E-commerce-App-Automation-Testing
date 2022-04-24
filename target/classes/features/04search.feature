@@ -1,4 +1,5 @@
 @search
+@regression
 Feature: logged user could search for any product
 
   Background: user opens browser to search products
