@@ -1,7 +1,9 @@
+@createOrder
 Feature: user creates successful order
 
-  Background: user opens browser
+  Background: user opens browser to create an order
     And user navigates to homepage
+
   Scenario: user creates successful order
     When user selects Category Jewelry
     And user adds Flower Girl Bracelet to the Shopping cart

@@ -1,6 +1,7 @@
+@search
 Feature: logged user could search for any product
 
-  Background: user opens browser
+  Background: user opens browser to search products
   And user goes to login page
   And user logs in with email "jane.doe@gmail.com" and password "password"
   And user logs in by clicking login button

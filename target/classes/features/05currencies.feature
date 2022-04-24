@@ -1,6 +1,7 @@
+@currency
 Feature: Logged User could switch between currencies US-Euro
 
-  Background: user opens browser
+  Background: user opens browser to switch between currencies
     And user types login page
     And user logs in with "jane.doe@gmail.com" and "password"
     And user clicks login button

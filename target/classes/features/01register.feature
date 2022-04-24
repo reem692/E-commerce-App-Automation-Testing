@@ -1,6 +1,7 @@
+@register
 Feature: user could register with valid data
 
-  Background: user opens browser
+  Background: user opens browser to register
     And user navigates to register page
 
   Scenario: user could register with valid data
