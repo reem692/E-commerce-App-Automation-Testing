@@ -12,11 +12,11 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class categoriesStepDefinition {
+public class filterColorStepDefinition {
     WebDriver driver = null;
     loginPage login;
     categoriesPage categories;
-    @Before("@category")
+    @Before("@color")
     public void OpenBrowser() throws InterruptedException {
         //first step-Bridge between test scripts and browser
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -34,38 +34,54 @@ public class categoriesStepDefinition {
         login = new loginPage(driver);
         categories = new categoriesPage(driver);
     }
-    @And("user moves to login page")
+    @And("user moves to page to login")
     public void login_page()
     {
         driver.navigate().to("https://demo.nopcommerce.com/login?returnUrl=%2F");
     }
-    @And("^user enters \"(.*)\" and \"(.*)\"$")
+    @And("^enters \"(.*)\" and \"(.*)\"$")
     public void data(String email, String password)
     {
         login.loginSteps(email, password);
 
     }
-    @And("user clicks on button to login")
+    @And("clicks on button to login")
     public void login()
     {
         login.loginElementPOM();
     }
 
-    @When("user selects category Electronics")
-    public void select_category() throws InterruptedException {
-        categories.categoryElementPOM();
+    @When("user selects category Apparel")
+    public void select_apparel() throws InterruptedException {
+        categories.apparelCategoryElementPOM();
     }
-    @And("user selects subcategory Cell phones")
-    public void select_subcategory()
+    @And("user selects subcategory Shoes")
+    public void select_shoes()
     {
-        categories.subCategoryElementPOM();
+        categories.shoesSubCategoryElementPOM();
     }
-    @Then("user gets all cellphones shown")
-    public void get_products()
+    @And("user selects color red")
+    public void select_red()
     {
-        Assert.assertEquals("https://demo.nopcommerce.com/cell-phones", driver.getCurrentUrl());
+        categories.redElementPOM();
     }
-    @After("@category")
+    @Then("user gets all offered red shoes")
+    public void get_red_shoes()
+    {
+        Assert.assertEquals("https://demo.nopcommerce.com/shoes?viewmode=grid&orderby=0&pagesize=6&specs=15", driver.getCurrentUrl());
+    }
+    @And("user selects color grey")
+    public void select_grey()
+    {
+        categories.greyElementPOM();
+    }
+    @And("user gets all offered red and grey shoes")
+    public void get_red_and_grey_shoes()
+    {
+        Assert.assertEquals("https://demo.nopcommerce.com/shoes?viewmode=grid&orderby=0&pagesize=6&specs=14%2C15", driver.getCurrentUrl());
+    }
+
+    @After("@color")
     public void close_browser()
     {
         driver.quit();

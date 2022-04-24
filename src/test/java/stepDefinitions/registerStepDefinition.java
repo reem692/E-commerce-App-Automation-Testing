@@ -4,6 +4,7 @@ import Pages.registerPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -14,7 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class registerStepDefinition {
     WebDriver driver = null;
     registerPage register;
-    @Before
+    @Before("@register")
     public void OpenBrowser() throws InterruptedException {
         //first step-Bridge between test scripts and browser
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -107,7 +108,7 @@ public class registerStepDefinition {
         Assert.assertEquals("https://demo.nopcommerce.com/", driver.getCurrentUrl());
     }
 
-    @After
+    @After("@register")
     public void close_browser()
     {
         driver.quit();

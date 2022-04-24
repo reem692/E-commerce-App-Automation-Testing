@@ -12,11 +12,11 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class categoriesStepDefinition {
+public class tagsStepDefinition {
     WebDriver driver = null;
     loginPage login;
     categoriesPage categories;
-    @Before("@category")
+    @Before("@tag")
     public void OpenBrowser() throws InterruptedException {
         //first step-Bridge between test scripts and browser
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -34,38 +34,50 @@ public class categoriesStepDefinition {
         login = new loginPage(driver);
         categories = new categoriesPage(driver);
     }
-    @And("user moves to login page")
+    @And("moves to login page")
     public void login_page()
     {
         driver.navigate().to("https://demo.nopcommerce.com/login?returnUrl=%2F");
     }
-    @And("^user enters \"(.*)\" and \"(.*)\"$")
+    @And("^enters \"(.*)\" \"(.*)\"$")
     public void data(String email, String password)
     {
         login.loginSteps(email, password);
 
     }
-    @And("user clicks on button to login")
+    @And("clicks on login")
     public void login()
     {
         login.loginElementPOM();
     }
 
-    @When("user selects category Electronics")
-    public void select_category() throws InterruptedException {
-        categories.categoryElementPOM();
+    @When("user selects category Computers")
+    public void select_computers() {
+        categories.computerCategoryElementPOM();
     }
-    @And("user selects subcategory Cell phones")
-    public void select_subcategory()
+    @And("user selects tag compact")
+    public void select_compactTag()
     {
-        categories.subCategoryElementPOM();
+        categories.compactTagElementPOM();
     }
-    @Then("user gets all cellphones shown")
-    public void get_products()
+    @Then("user gets all products tagged with compact")
+    public void get_compact_products()
     {
-        Assert.assertEquals("https://demo.nopcommerce.com/cell-phones", driver.getCurrentUrl());
+        Assert.assertEquals("https://demo.nopcommerce.com/compact", driver.getCurrentUrl());
     }
-    @After("@category")
+    @And("user selects tag camera")
+    public void select_cameraTag()
+    {
+        categories.cameraTagElementPOM();
+    }
+    @And("user gets all products tagged with camera")
+    public void get_camera_products()
+    {
+        Assert.assertEquals("https://demo.nopcommerce.com/camera", driver.getCurrentUrl());
+
+    }
+
+    @After("@tag")
     public void close_browser()
     {
         driver.quit();

@@ -7,6 +7,7 @@ import Pages.loginPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -17,7 +18,7 @@ public class createOrderStepDefinition {
     WebDriver driver = null;
     addProductsPage addProducts;
     createOrderPage createOrder;
-    @Before
+    @Before("@createOrder")
     public void OpenBrowser() throws InterruptedException {
         //first step-Bridge between test scripts and browser
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -157,7 +158,7 @@ public class createOrderStepDefinition {
         Thread.sleep(3000);
         Assert.assertEquals("https://demo.nopcommerce.com/checkout/completed", driver.getCurrentUrl());
     }
-    @After
+    @After("@createOrder")
     public void close_browser()
     {
         driver.quit();

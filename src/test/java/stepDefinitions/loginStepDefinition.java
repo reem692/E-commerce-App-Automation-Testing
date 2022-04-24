@@ -4,6 +4,7 @@ import Pages.loginPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -14,7 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class loginStepDefinition {
     WebDriver driver = null;
     loginPage login;
-    @Before
+    @Before("@login")
     public void OpenBrowser() throws InterruptedException {
         //first step-Bridge between test scripts and browser
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -64,31 +65,7 @@ public class loginStepDefinition {
         Assert.assertEquals("https://demo.nopcommerce.com/", driver.getCurrentUrl());
     }
 
-    @When("user clicks on Forget Password?")
-    public void forget_Password()
-    {
-        login.forgetPasswordElementPOM();
-    }
-    @And("^user types email \"(.*)\"$")
-    public void enter_Email(String email)
-    {
-        login.emailElementPOM(email);
-
-    }
-    @And("user clicks on recover button")
-    public void recover_button() throws InterruptedException {
-        Thread.sleep(3000);
-        login.recoverElementPOM();
-    }
-    @Then("user resets password successfully")
-    public void success_password_reset()
-    {
-        String expectedResult ="Email with instructions has been sent to you.";
-        String actualResult = driver.findElement(By.className("content")).getText();
-        Assert.assertTrue(actualResult.contains(expectedResult));
-    }
-
-    @After
+    @After("@login")
     public void close_browser()
     {
         driver.quit();

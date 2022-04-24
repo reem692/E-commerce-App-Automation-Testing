@@ -5,6 +5,7 @@ import Pages.searchPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -15,7 +16,7 @@ public class searchStepDefinition {
     WebDriver driver = null;
     loginPage login;
     searchPage search;
-    @Before
+    @Before("@search")
     public void OpenBrowser() throws InterruptedException {
         //first step-Bridge between test scripts and browser
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -119,11 +120,7 @@ public class searchStepDefinition {
         Assert.assertEquals("https://demo.nopcommerce.com/search?q=laptop&advs=true&cid=1&isc=true&mid=2&sid=true&advs=false&isc=false&sid=false", driver.getCurrentUrl());
 
     }
-
-
-
-
-    @After
+    @After("@search")
     public void close_browser()
     {
         driver.quit();

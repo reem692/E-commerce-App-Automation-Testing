@@ -6,6 +6,7 @@ import Pages.searchPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -16,8 +17,8 @@ public class currenciesStepDefinition {
     WebDriver driver = null;
     loginPage login;
     searchPage search;
-    currenciesPage currrencies;
-    @Before
+    currenciesPage currencies;
+    @Before("@currency")
     public void OpenBrowser() throws InterruptedException {
         //first step-Bridge between test scripts and browser
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -34,7 +35,7 @@ public class currenciesStepDefinition {
         //forth Step-Create new Object
         login = new loginPage(driver);
         search = new searchPage(driver);
-        currrencies = new currenciesPage(driver);
+        currencies = new currenciesPage(driver);
     }
     @And("user types login page")
     public void login_page()
@@ -68,7 +69,7 @@ public class currenciesStepDefinition {
     @And("^user chooses currency \"(.*)\" from currency dropbox")
     public void select_currency(String currency)
     {
-        currrencies.currencyElementPOM(currency);
+        currencies.currencyElementPOM(currency);
     }
 
     @Then("user get price in Euro")
@@ -81,7 +82,7 @@ public class currenciesStepDefinition {
    {
        Assert.assertEquals("$1,800.00", driver.findElement(By.className("actual-price")).getText());
    }
-    @After
+    @After("@currency")
     public void close_browser()
     {
         driver.quit();

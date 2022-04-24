@@ -6,6 +6,7 @@ import Pages.loginPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -13,12 +14,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class addProductsStepDefinition {
+public class wishListStepDefinition {
     WebDriver driver = null;
     loginPage login;
     categoriesPage categories;
     addProductsPage addProducts;
-    @Before
+    @Before("@wishList")
     public void OpenBrowser() throws InterruptedException {
         //first step-Bridge between test scripts and browser
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -37,60 +38,28 @@ public class addProductsStepDefinition {
         categories = new categoriesPage(driver);
         addProducts = new addProductsPage(driver);
     }
-    @And("user enters the login page")
+    @And("enters the login page")
     public void login_page()
     {
         driver.navigate().to("https://demo.nopcommerce.com/login?returnUrl=%2F");
     }
-    @And("^user keys in \"(.*)\" and \"(.*)\"$")
+    @And("^keys in \"(.*)\", \"(.*)\"$")
     public void data(String email, String password)
     {
         login.loginSteps(email, password);
 
     }
-    @And("user could click the login button")
+    @And("user click the login button")
     public void login()
     {
         login.loginElementPOM();
     }
-    @When("user clicks on Category Jewelry")
-    public void select_Jewelery()
-    {
-        addProducts.jewelryCategoryElementPOM();
-    }
-    @And("user adds Bracelet to the Shopping cart")
-    public void add_bracelet() throws InterruptedException {
-        addProducts.addBraceletElementPOM();
-        Thread.sleep(3000);
 
-    }
-    @Then("user adds product successfully")
-    public void product_added_successfully() {
-        String actualResult = driver.findElement(By.xpath("//div[@id='bar-notification']//div[@class='bar-notification success']")).getText();
-        Assert.assertEquals("The product has been added to your shopping cart", actualResult);
-    }
-    @Then("user clicks on Category Books")
-    public void select_Books() throws InterruptedException {
-        Thread.sleep(3000);
-        addProducts.bookCategoryElementPOM();
-    }
-    @And("user adds Pride and Prejudice to the Shopping cart")
-    public void add_book() throws InterruptedException {
-        addProducts.addBookElementPOM();
-        Thread.sleep(3000);
-
-    }
-    @And("user adds second product successfully to Shopping cart")
-    public void second_product_added_successfully()
-    {
-        String actualResult = driver.findElement(By.xpath("//div[@id='bar-notification']//div[@class='bar-notification success']")).getText();
-        Assert.assertEquals("The product has been added to your shopping cart", actualResult);
-    }
-    @When("user chooses Category Electronics")
+    @When("user selects Category Electronics")
     public void select_Electronics() throws InterruptedException {
         addProducts.electronicsCategoryElementPOM();
     }
-    @And("user chooses subCategory Cellphones")
+    @And("user selects subCategory Cellphones")
     public void select_Cellphones() {
         addProducts.cellphonesSubcategoryElementPOM();
     }
@@ -124,30 +93,7 @@ public class addProductsStepDefinition {
         String actualResult = driver.findElement(By.xpath("//div[@id='bar-notification']//div[@class='bar-notification success']")).getText();
         Assert.assertEquals("The product has been added to your wishlist", actualResult);
     }
-    @And("user adds a HTC One to the compareList")
-    public void add_HTCCellphone() throws InterruptedException {
-        addProducts.addHTCCellphoneElementPOM();
-        Thread.sleep(3000);
-
-    }
-    @Then("user adds product successfully to compareList")
-    public void product_added_successfully_to_compareList() {
-        String actualResult = driver.findElement(By.xpath("//div[@id='bar-notification']//div[@class='bar-notification success']")).getText();
-        Assert.assertEquals("The product has been added to your product comparison", actualResult);
-    }
-    @And("user adds Nokia Lumia to compareList")
-    public void add_NokiaCellphone() throws InterruptedException {
-        addProducts.addNokiaCellphoneElementPOM();
-        Thread.sleep(3000);
-
-    }
-    @And("user adds second product successfully to compareList")
-    public void second_product_added_successfully_to_compareList() {
-        String actualResult = driver.findElement(By.xpath("//div[@id='bar-notification']//div[@class='bar-notification success']")).getText();
-        Assert.assertEquals("The product has been added to your product comparison", actualResult);
-    }
-
-    @After
+    @After("@wishList")
     public void close_browser()
     {
         driver.quit();

@@ -1,6 +1,5 @@
 package stepDefinitions;
 
-import Pages.categoriesPage;
 import Pages.loginPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -9,14 +8,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class categoriesStepDefinition {
+public class resetStepDefinition {
     WebDriver driver = null;
     loginPage login;
-    categoriesPage categories;
-    @Before("@category")
+    @Before("@reset")
     public void OpenBrowser() throws InterruptedException {
         //first step-Bridge between test scripts and browser
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
@@ -32,45 +31,41 @@ public class categoriesStepDefinition {
 
         //forth Step-Create new Object
         login = new loginPage(driver);
-        categories = new categoriesPage(driver);
     }
-    @And("user moves to login page")
-    public void login_page()
+
+    @And("user enters login page")
+    public void user_navigates()
     {
         driver.navigate().to("https://demo.nopcommerce.com/login?returnUrl=%2F");
-    }
-    @And("^user enters \"(.*)\" and \"(.*)\"$")
-    public void data(String email, String password)
-    {
-        login.loginSteps(email, password);
 
     }
-    @And("user clicks on button to login")
-    public void login()
+    @When("user clicks on Forget Password?")
+    public void forget_Password()
     {
-        login.loginElementPOM();
+        login.forgetPasswordElementPOM();
+    }
+    @And("^user types email \"(.*)\"$")
+    public void enter_Email(String email)
+    {
+        login.emailElementPOM(email);
+
+    }
+    @And("user clicks on recover button")
+    public void recover_button() throws InterruptedException {
+        Thread.sleep(3000);
+        login.recoverElementPOM();
+    }
+    @Then("user resets password successfully")
+    public void success_password_reset()
+    {
+        String expectedResult ="Email with instructions has been sent to you.";
+        String actualResult = driver.findElement(By.className("content")).getText();
+        Assert.assertTrue(actualResult.contains(expectedResult));
     }
 
-    @When("user selects category Electronics")
-    public void select_category() throws InterruptedException {
-        categories.categoryElementPOM();
-    }
-    @And("user selects subcategory Cell phones")
-    public void select_subcategory()
-    {
-        categories.subCategoryElementPOM();
-    }
-    @Then("user gets all cellphones shown")
-    public void get_products()
-    {
-        Assert.assertEquals("https://demo.nopcommerce.com/cell-phones", driver.getCurrentUrl());
-    }
-    @After("@category")
+    @After("@reset")
     public void close_browser()
     {
         driver.quit();
     }
-
-
-
 }
